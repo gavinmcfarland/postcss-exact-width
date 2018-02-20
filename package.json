@@ -2,7 +2,7 @@
   "name": "postcss-exact-width",
   "version": "0.0.1",
   "description": "Gives you the exact width and height desired when applied to flex items",
-  "author": "Gavin McFarland <someotter@tadpot.com>",
+  "author": "Gavin <someotter@tadpot.com>",
   "license": "CC0-1.0",
   "repository": "mindthetic/postcss-exact-width",
   "homepage": "https://github.com/mindthetic/postcss-exact-width#readme",

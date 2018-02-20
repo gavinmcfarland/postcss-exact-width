@@ -1,6 +1,52 @@
 // tooling
 import postcss from 'postcss';
 
+function flexDirectionProp(decl) {
+	const childSelector = " > *";
+	const originalRule = decl.parent;
+	const slottedSelector = " ::slotted(*)";
+	const levelTwoRule = postcss.rule({selector: originalRule.selector + childSelector});
+	const levelTwoSlotted = postcss.rule({selector: originalRule.selector + slottedSelector});
+
+
+	if (decl.value === "column") {
+		// Add new rules
+		originalRule.before(levelTwoRule);
+		originalRule.before(levelTwoSlotted);
+
+		levelTwoRule.append(
+			`--column-grow: 0;
+			 --row-grow: initial;`
+		);
+		levelTwoSlotted.append(
+			`--column-grow: 0;
+			 --row-grow: initial;`
+		);
+
+		originalRule.walk(i => {i.raws.before = "\n\t";});
+		levelTwoRule.walk(i => {i.raws.before = "\n\t";});
+		levelTwoSlotted.walk(i => {i.raws.before = "\n\t";});
+	}
+	if (decl.value === "row") {
+		// Add new rules
+		originalRule.before(levelTwoRule);
+		originalRule.before(levelTwoSlotted);
+
+		levelTwoRule.append(
+			`--row-grow: 0;
+			 --column-grow: initial;`
+		);
+		levelTwoSlotted.append(
+			`--row-grow: 0;
+			 --column-grow: initial;`
+		);
+
+		originalRule.walk(i => {i.raws.before = "\n\t";});
+		levelTwoRule.walk(i => {i.raws.before = "\n\t";});
+		levelTwoSlotted.walk(i => {i.raws.before = "\n\t";});
+	}
+}
+
 function lengthProp(decl) {
 	const childSelector = " > *";
 	const originalRule = decl.parent;
@@ -81,7 +127,19 @@ export default postcss.plugin('postcss-exact-width', opts => {
 	console.log('opts', opts);
 
 	return function (root) {
+		const rootRule = postcss.rule({selector: ":root"});
+		root.prepend(rootRule);
+		rootRule.append({
+			prop: "--row-grow",
+			value: "0"
+		},{
+			prop: "--column-grow",
+			value: "initial"
+		});
 		root.walkDecls(function (decl) {
+			if (decl.prop === "flex-direction") {
+				flexDirectionProp(decl);
+			}
 			if (decl.prop === "width" || decl.prop === "height") {
 				lengthProp(decl);
 			}

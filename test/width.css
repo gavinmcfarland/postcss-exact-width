@@ -1,3 +1,7 @@
-.example {
+.container {
+	flex-direction: column;
+}
+
+.item {
 	width: 50%;
 }

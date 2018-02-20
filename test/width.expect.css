@@ -1,7 +1,27 @@
-.example > * {
+:root {
+	--row-grow: 0;
+	--column-grow: initial;
+}
+
+.container > * {
+	--column-grow: 0;
+	--row-grow: initial;
+}
+
+.container ::slotted(*) {
+	--column-grow: 0;
+	--row-grow: initial;
+}
+
+.container {
+	flex-direction: column;
+}
+
+.item > * {
 	--width-grow: initial;
 }
-.example {
+
+.item {
 	--width-grow: 0;
 	flex-grow: var(--row-grow, var(--height-grow, 1));
 	flex-shrink: 0;
