@@ -1,6 +1,6 @@
 {
   "name": "postcss-exact-width",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Gives you the exact width and height desired when applied to flex items",
   "author": "Gavin <someotter@tadpot.com>",
   "license": "CC0-1.0",
