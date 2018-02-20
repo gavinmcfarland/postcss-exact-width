@@ -1,0 +1,12 @@
+.example > * {
+	--width: initial;
+	--width-grow: initial;
+}
+.example {
+	--width: 0.5;
+	--width-grow: 0;
+	flex-grow: var(--row-grow, var(--height-grow, 1));
+	flex-shrink: 0;
+	flex-basis: auto !important;
+	width: 50%;
+}

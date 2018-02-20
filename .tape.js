@@ -1,7 +1,10 @@
 module.exports = {
 	'postcss-exact-width': {
-		'basic': {
-			message: 'supports basic usage'
+		'width': {
+			message: 'supports width'
+		},
+		'height': {
+			message: 'supports height'
 		}
 	}
 };
