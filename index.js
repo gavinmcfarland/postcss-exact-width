@@ -46,20 +46,15 @@ function lengthProp(decl) {
 	}
 	else if (percentage) {
 
-
-		let number = decl.value.replace(/\%/g, "");
-
 		decl.before(
-			`--${prop}: ${number / 100};
-			 --${prop}-grow: 0;
+			`--${prop}-grow: 0;
 			 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, 1));
 			 flex-shrink: 0;
 			 flex-basis: auto !important;`
 		);
 
 		levelTwoRule.append(
-			`--${prop}: initial;
-			 --${prop}-grow: initial;`
+			`--${prop}-grow: initial;`
 		);
 
 	}
