@@ -5,135 +5,31 @@
 [![Windows Build Status][win-img]][win-url]
 [![Gitter Chat][git-img]][git-url]
 
-[PostCSS Exact Width] lets you do this in CSS.
+Gives you the exact width and height desired when applied to flex items.
 
 ```css
-.example {}
-
-/* becomes */
-
-.example {}
-```
-
-## Usage
-
-Add [PostCSS Exact Width] to your build tool:
-
-```bash
-npm install postcss-exact-width --save-dev
-```
-
-#### Node
-
-Use [PostCSS Exact Width] to process your CSS:
-
-```js
-import exactWidth from 'postcss-exact-width';
-
-exactWidth.process(YOUR_CSS);
-```
-
-#### PostCSS
-
-Add [PostCSS] to your build tool:
-
-```bash
-npm install postcss --save-dev
-```
-
-Use [PostCSS Exact Width] as a plugin:
-
-```js
-import postcss from 'gulp-postcss';
-import exactWidth from 'postcss-exact-width';
-
-postcss([
-  exactWidth()
-]).process(YOUR_CSS);
-```
-
-#### Webpack
-
-Add [PostCSS Loader] to your build tool:
-
-```bash
-npm install postcss-loader --save-dev
-```
-
-Use [PostCSS Exact Width] in your Gulpfile:
-
-```js
-import exactWidth from 'postcss-exact-width';
-
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          { loader: 'postcss-loader', options: {
-            ident: 'postcss',
-            plugins: () => [ exactWidth() ]
-          } }
-        ]
-      }
-    ]
-  }
+.example {
+  width: 50%;
 }
 ```
 
-#### Gulp
+```css
+.example > * {
+	--width-grow: initial;
+}
+.example {
+	--width-grow: 0;
+	flex-grow: var(--row-grow, var(--height-grow, 1));
+	flex-shrink: 0;
+	flex-basis: auto !important;
+	width: 50%;
+}
+```
 
-Add [Gulp PostCSS] to your build tool:
+## Setup
 
 ```bash
-npm install gulp-postcss --save-dev
-```
-
-Use [PostCSS Exact Width] in your Gulpfile:
-
-```js
-import postcss from 'gulp-postcss';
-import exactWidth from 'postcss-exact-width';
-
-gulp.task('css', () => gulp.src('./src/*.css').pipe(
-  postcss([
-    exactWidth()
-  ])
-).pipe(
-  gulp.dest('.')
-));
-```
-
-#### Grunt
-
-Add [Grunt PostCSS] to your build tool:
-
-```bash
-npm install grunt-postcss --save-dev
-```
-
-Use [PostCSS Exact Width] in your Gruntfile:
-
-```js
-import exactWidth from 'postcss-exact-width';
-
-grunt.loadNpmTasks('grunt-postcss');
-
-grunt.initConfig({
-  postcss: {
-    options: {
-      use: [
-       exactWidth()
-      ]
-    },
-    dist: {
-      src: '*.css'
-    }
-  }
-});
+npm install postcss-gutters --save-dev
 ```
 
 [npm-url]: https://www.npmjs.com/package/postcss-exact-width
