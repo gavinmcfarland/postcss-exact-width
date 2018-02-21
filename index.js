@@ -47,12 +47,31 @@ function flexDirectionProp(decl) {
 	}
 }
 
+// function flexGrowProp(decl) {
+// 	const childSelector = " > *";
+// 	const originalRule = decl.parent;
+// 	const slottedSelector = " ::slotted(*)";
+// 	const levelTwoRule = postcss.rule({selector: originalRule.selector + childSelector});
+// 	const levelTwoSlotted = postcss.rule({selector: originalRule.selector + slottedSelector});
+//
+//
+// 	originalRule.prepend(
+// 		`--flex-grow: ${decl.value};`
+// 	);
+//
+// 	decl.remove();
+//
+// 	originalRule.walk(i => {i.raws.before = "\n\t";});
+// 	levelTwoRule.walk(i => {i.raws.before = "\n\t";});
+// 	levelTwoSlotted.walk(i => {i.raws.before = "\n\t";});
+// }
+
 function lengthProp(decl) {
 	const childSelector = " > *";
 	const originalRule = decl.parent;
 	const levelTwoRule = postcss.rule({selector: originalRule.selector + childSelector});
 
-	let percentage = decl.value.match(/[\d\.]+%/g);
+	// let percentage = decl.value.match(/[\d\.]+%/g);
 	let prop = decl.prop;
 	let oppProp;
 	let direction;
@@ -90,11 +109,21 @@ function lengthProp(decl) {
 
 		decl.remove();
 	}
-	else if (percentage) {
+	else {
+
+		decl.parent.walkDecls(function (newdecl) {
+			if (newdecl.prop === "flex-grow") {
+				originalRule.prepend(
+					`--flex-grow: ${newdecl.value};`
+				);
+
+				newdecl.remove();
+			}
+		});
 
 		decl.before(
 			`--${prop}-grow: 0;
-			 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, 1));
+			 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, var(--flex-grow, 0)));
 			 flex-shrink: 0;
 			 flex-basis: auto !important;`
 		);
@@ -104,18 +133,18 @@ function lengthProp(decl) {
 		);
 
 	}
-	else {
-		decl.before(
-			`--width-grow: 0;
-			 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, 1));
-			 flex-shrink: 0;
-			 flex-basis: auto !important`
-		);
-		levelTwoRule.append(
-			`--width-grow: initial;`
-		);
-
-	}
+	// else {
+	// 	decl.before(
+	// 		`--width-grow: 0;
+	// 		 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, var(--flex-grow, 0)));
+	// 		 flex-shrink: 0;
+	// 		 flex-basis: auto !important`
+	// 	);
+	// 	levelTwoRule.append(
+	// 		`--${prop}-grow: initial;`
+	// 	);
+    //
+	// }
 
 	originalRule.walk(i => {i.raws.before = "\n\t";});
 	levelTwoRule.walk(i => {i.raws.before = "\n\t";});

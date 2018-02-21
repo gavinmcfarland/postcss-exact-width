@@ -22,8 +22,9 @@
 }
 
 .item {
+	--flex-grow: 1;
 	--width-grow: 0;
-	flex-grow: var(--row-grow, var(--height-grow, 1));
+	flex-grow: var(--row-grow, var(--height-grow, var(--flex-grow, 0)));
 	flex-shrink: 0;
 	flex-basis: auto !important;
 	width: 50%;
