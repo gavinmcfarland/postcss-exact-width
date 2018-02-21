@@ -7,23 +7,15 @@
 
 Gives you the exact width and height desired when applied to flex items.
 
+Example:
+
 ```css
 .example {
 	width: 50%;
 }
 ```
 
-```css
-.example {
-	/* Prevents flex-grow when height added aswell */
-	--width-grow: 0;
-	/* Checks for flex-direction then if height applied, then if flex-grow already applied */
-	flex-grow: var(--row-grow, var(--height-grow, var(--flex-grow, 0)));
-	flex-shrink: 0;
-	flex-basis: auto;
-	width: 50%;
-}
-```
+This will apply `flex-grow: 0` only if the `flex-direction` is the same as the `length` being applied, or if both `width` and `height` are applied. 
 
 ## Setup
 
