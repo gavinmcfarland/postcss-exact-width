@@ -69,7 +69,9 @@ function flexDirectionProp(decl) {
 function lengthProp(decl) {
 	const childSelector = " > *";
 	const originalRule = decl.parent;
+	const slottedSelector = " ::slotted(*)";
 	const levelTwoRule = postcss.rule({selector: originalRule.selector + childSelector});
+	const levelTwoSlotted = postcss.rule({selector: originalRule.selector + slottedSelector});
 
 	// let percentage = decl.value.match(/[\d\.]+%/g);
 	let prop = decl.prop;
@@ -89,6 +91,7 @@ function lengthProp(decl) {
 
 	// Add new rules
 	originalRule.before(levelTwoRule);
+	levelTwoRule.before(levelTwoSlotted);
 
 	if (decl.value === "shrink") {
 		decl.before(
@@ -132,6 +135,10 @@ function lengthProp(decl) {
 			`--${prop}-grow: initial;`
 		);
 
+		levelTwoSlotted.append(
+			`flex-basis: auto !important;`
+		);
+
 	}
 	// else {
 	// 	decl.before(
@@ -148,6 +155,7 @@ function lengthProp(decl) {
 
 	originalRule.walk(i => {i.raws.before = "\n\t";});
 	levelTwoRule.walk(i => {i.raws.before = "\n\t";});
+	levelTwoSlotted.walk(i => {i.raws.before = "\n\t";});
 
 }
 

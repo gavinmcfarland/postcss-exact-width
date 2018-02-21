@@ -17,6 +17,10 @@
 	flex-direction: column;
 }
 
+.item ::slotted(*) {
+	flex-basis: auto !important;
+}
+
 .item > * {
 	--width-grow: initial;
 }
