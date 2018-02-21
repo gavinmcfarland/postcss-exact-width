@@ -125,7 +125,7 @@ function lengthProp(decl) {
 			`--${prop}-grow: 0;
 			 flex-grow: var(--${direction}-grow, var(--${oppProp}-grow, var(--flex-grow, 0)));
 			 flex-shrink: 0;
-			 flex-basis: auto !important;`
+			 flex-basis: auto;`
 		);
 
 		levelTwoRule.append(
