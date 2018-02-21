@@ -4,7 +4,7 @@ import postcss from 'postcss';
 function flexDirectionProp(decl) {
 	const childSelector = " > *";
 	const originalRule = decl.parent;
-	const slottedSelector = " ::slotted(*)";
+	const slottedSelector = " > ::slotted(*)";
 	const levelTwoRule = postcss.rule({selector: originalRule.selector + childSelector});
 	const levelTwoSlotted = postcss.rule({selector: originalRule.selector + slottedSelector});
 

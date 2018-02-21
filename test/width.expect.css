@@ -8,7 +8,7 @@
 	--row-grow: initial;
 }
 
-.container ::slotted(*) {
+.container > ::slotted(*) {
 	--column-grow: 0;
 	--row-grow: initial;
 }
