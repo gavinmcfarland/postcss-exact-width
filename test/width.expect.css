@@ -17,10 +17,6 @@
 	flex-direction: column;
 }
 
-.item > ::slotted(*) {
-	flex-basis: auto !important;
-}
-
 .item > * {
 	--width-grow: initial;
 }
@@ -30,6 +26,6 @@
 	--width-grow: 0;
 	flex-grow: var(--row-grow, var(--height-grow, var(--flex-grow, 0)));
 	flex-shrink: 0;
-	flex-basis: auto;
+	flex-basis: auto !important;
 	width: 50%;
 }
