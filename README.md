@@ -9,19 +9,18 @@ Gives you the exact width and height desired when applied to flex items.
 
 ```css
 .example {
-  width: 50%;
+	width: 50%;
 }
 ```
 
 ```css
-.example > * {
-	--width-grow: initial;
-}
 .example {
+	/* Prevents flex-grow when height added aswell */
 	--width-grow: 0;
-	flex-grow: var(--row-grow, var(--height-grow, 1));
+	/* Checks for flex-direction then if height applied, then if flex-grow already applied */
+	flex-grow: var(--row-grow, var(--height-grow, var(--flex-grow, 0)));
 	flex-shrink: 0;
-	flex-basis: auto !important;
+	flex-basis: auto;
 	width: 50%;
 }
 ```
