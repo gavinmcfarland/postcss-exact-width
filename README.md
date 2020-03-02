@@ -25,14 +25,14 @@ npm install postcss-gutters --save-dev
 
 [npm-url]: https://www.npmjs.com/package/postcss-exact-width
 [npm-img]: https://img.shields.io/npm/v/postcss-exact-width.svg
-[cli-url]: https://travis-ci.org/mindthetic/postcss-exact-width
-[cli-img]: https://img.shields.io/travis/mindthetic/postcss-exact-width.svg
-[win-url]: https://ci.appveyor.com/project/mindthetic/postcss-exact-width
-[win-img]: https://img.shields.io/appveyor/ci/mindthetic/postcss-exact-width.svg
+[cli-url]: https://travis-ci.org/limitlessloop/postcss-exact-width
+[cli-img]: https://img.shields.io/travis/limitlessloop/postcss-exact-width.svg
+[win-url]: https://ci.appveyor.com/project/limitlessloop/postcss-exact-width
+[win-img]: https://img.shields.io/appveyor/ci/limitlessloop/postcss-exact-width.svg
 [git-url]: https://gitter.im/postcss/postcss
 [git-img]: https://img.shields.io/badge/chat-gitter-blue.svg
 
-[PostCSS Exact Width]: https://github.com/mindthetic/postcss-exact-width
+[PostCSS Exact Width]: https://github.com/limitlessloop/postcss-exact-width
 [Gulp PostCSS]: https://github.com/postcss/gulp-postcss
 [Grunt PostCSS]: https://github.com/nDmitry/grunt-postcss
 [PostCSS]: https://github.com/postcss/postcss
